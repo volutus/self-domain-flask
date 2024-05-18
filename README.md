@@ -21,4 +21,4 @@ I also had to remove the HTTP -> HTTPS redirect which I did by restoring the ngi
 
 At this point, I wanted to test a Docker setup, so I installed the Docker engine [using the standard guide from Docker](https://docs.docker.com/engine/install/debian/). 
 
-The goal is to reach a setup similar to the [one in this example repo.[(https://github.com/docker/awesome-compose/tree/master/nginx-wsgi-flask)
+The goal is to reach a setup similar to the [one in this example repo.](https://github.com/docker/awesome-compose/tree/master/nginx-wsgi-flask)
