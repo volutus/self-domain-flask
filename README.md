@@ -12,6 +12,8 @@ The issue was caused by the nginx user being set to the www-data group by defaul
 ## Initial TLS Setup (Certbot)
 The SSL/TLS setup was particularly trivial. Using certbot, I was able to put a LetsEncrypt cert on the domain within a few minutes.
 
+This is addressed in the DigitalOcean guide above, but [this specific guide from F5 is useful as well.](https://www.f5.com/company/blog/nginx/using-free-ssltls-certificates-from-lets-encrypt-with-nginx)
+
 ## Cloudflare
 Afterwards, I opted to add the domain to Cloudflare via their free plan. I added the domain, changed the nameservers at my registrar (Namecheap), and removed the cert in certbot with `sudo certbot delete`. 
 
