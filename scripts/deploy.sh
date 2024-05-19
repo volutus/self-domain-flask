@@ -1,2 +1,2 @@
 git pull origin master
-sudo systemctl restart flask
+sudo systemctl restart flask.service
