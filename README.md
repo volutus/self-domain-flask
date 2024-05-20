@@ -22,11 +22,21 @@ I also had to remove the HTTP -> HTTPS redirect which I did by restoring the ngi
 ## CI/CD 
 I did some cleanup on the scripts by moving them into their own folder and creating a deployment script (deploy.sh).
 
-This required some administrative work on the system side. I added the following to a new file (flask-rules) inside the /etc/sudoers.d directory
+This required some administrative work on the system side. I added the following to a new file (flask-rules) inside the `/etc/sudoers.d` directory
+
 ```bash
 flask ALL= NOPASSWD: /bin/systemctl restart flask.service
 flask ALL= NOPASSWD: /bin/systemctl stop flask.service
 flask ALL= NOPASSWD: /bin/systemctl start flask.service
+```
+
+However, this system is also using policy kit so I had to implement an additional file for that. The file is stored at `/etc/polkit-1/localauthority/50-local.d/manage-units.pkla` and has the following contents.
+
+```bash
+[Allow users to manage services]
+Identity=unix-group:flask
+Action=org.freedesktop.systemd1.manage-units
+ResultActive=yes
 ```
 
 ## Docker
