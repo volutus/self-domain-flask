@@ -30,7 +30,8 @@ flask ALL= NOPASSWD: /bin/systemctl stop flask.service
 flask ALL= NOPASSWD: /bin/systemctl start flask.service
 ```
 
-However, this system is also using policy kit so I had to implement an additional file for that. The file is stored at `/etc/polkit-1/localauthority/50-local.d/manage-units.pkla` and has the following contents.
+This system is also using policy kit so I had to implement an additional file for that.
+The file is stored at `/etc/polkit-1/localauthority/50-local.d/manage-units.pkla` and has the following contents.
 
 ```bash
 [Allow users to manage services]
@@ -38,6 +39,7 @@ Identity=unix-group:flask
 Action=org.freedesktop.systemd1.manage-units
 ResultActive=yes
 ```
+Even with these rules, I have to target the service by its full name which is a bit odd, but this setup allows me to automatically restart the Flask service without needing credentials. As a result, it could be automated if desired.
 
 ## Docker
 
