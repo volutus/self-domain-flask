@@ -19,6 +19,16 @@ Afterwards, I opted to add the domain to Cloudflare via their free plan. I added
 
 I also had to remove the HTTP -> HTTPS redirect which I did by restoring the nginx configuration file in sites-available to the original one from the Digital Ocean setup guide.
 
+## CI/CD 
+I did some cleanup on the scripts by moving them into their own folder and creating a deployment script (deploy.sh).
+
+This required some administrative work on the system side. I added the following to a new file (flask-rules) inside the /etc/sudoers.d directory
+```bash
+flask ALL= NOPASSWD: /bin/systemctl restart flask.service
+flask ALL= NOPASSWD: /bin/systemctl stop flask.service
+flask ALL= NOPASSWD: /bin/systemctl start flask.service
+```
+
 ## Docker
 
 At this point, I wanted to test a Docker setup, so I installed the Docker engine [using the standard guide from Docker](https://docs.docker.com/engine/install/debian/). 
