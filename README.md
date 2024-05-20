@@ -19,6 +19,28 @@ Afterwards, I opted to add the domain to Cloudflare via their free plan. I added
 
 I also had to remove the HTTP -> HTTPS redirect which I did by restoring the nginx configuration file in sites-available to the original one from the Digital Ocean setup guide.
 
+## CI/CD 
+I did some cleanup on the scripts by moving them into their own folder and creating a deployment script (deploy.sh).
+
+This required some administrative work on the system side. I added the following to a new file (flask-rules) inside the `/etc/sudoers.d` directory
+
+```bash
+flask ALL= NOPASSWD: /bin/systemctl restart flask.service
+flask ALL= NOPASSWD: /bin/systemctl stop flask.service
+flask ALL= NOPASSWD: /bin/systemctl start flask.service
+```
+
+This system is also using policy kit so I had to implement an additional file for that.
+The file is stored at `/etc/polkit-1/localauthority/50-local.d/manage-units.pkla` and has the following contents.
+
+```bash
+[Allow users to manage services]
+Identity=unix-group:flask
+Action=org.freedesktop.systemd1.manage-units
+ResultActive=yes
+```
+Even with these rules, I have to target the service by its full name which is a bit odd, but this setup allows me to automatically restart the Flask service without needing credentials. As a result, it could be automated if desired.
+
 ## Docker
 
 At this point, I wanted to test a Docker setup, so I installed the Docker engine [using the standard guide from Docker](https://docs.docker.com/engine/install/debian/). 
