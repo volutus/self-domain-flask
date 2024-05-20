@@ -11,7 +11,10 @@ def home():
 
 @app.route("/chess")
 def chess():
-    return render_template("chessboard.html")
+    content = dict()
+    content['rows'] = [8, 7, 6, 5, 4, 3, 2, 1]
+    content['squares'] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+    return render_template("chessboard.html", **content)
 
 
 if __name__ == "__main__":
