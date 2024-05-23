@@ -17,7 +17,7 @@
                 height: min(95vh, 95vw);
                 margin: auto;
             }
-            .square {
+            .square, .fake-square{
                 height: 12.5%;
                 width: 12.5%;
                 max-height: 100vw;
@@ -25,22 +25,33 @@
                 float: left;
                 padding: 0;
                 margin: auto;
-                color: white;
                 display: grid;
 	            align-items: center;
+	            align-content: center;
             }
             .fake-square {
                 display: none;
+            }
+            .piece {
+                font-size: calc(min(12vw, 12vh));
+            }
+            .black {
+                color: black;
+            }
+            .white {
+                color: white;
             }
         </style>
     </head>
     <body>
         <div class="chess-board">
-            {% for row in rows %}
-                <div class="square fake-square"></div>
-                {% for square in squares %}
-                    <div class="square"><div class="content">{{square}}{{row}}</div></div>
-                {% endfor %}
+            {% for piece in pieces %}
+                <div class="square">
+                    <div class="piece {{'white' if 'w' == piece[1] else 'black'}}">{{piece[0]}}</div>
+                </div>
+                {% if (loop.index) % 8 == 0 %}
+                    <div class="fake-square"></div>
+                {% endif %}
             {% endfor %}
         </div>
     </body>
