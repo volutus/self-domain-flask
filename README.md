@@ -42,7 +42,19 @@ ResultActive=yes
 Even with these rules, I have to target the service by its full name which is a bit odd, but this setup allows me to automatically restart the Flask service without needing credentials. As a result, it could be automated if desired.
 
 ## Docker
-
 At this point, I wanted to test a Docker setup, so I installed the Docker engine [using the standard guide from Docker](https://docs.docker.com/engine/install/debian/). 
 
 The goal is to reach a setup similar to the [one in this example repo.](https://github.com/docker/awesome-compose/tree/master/nginx-wsgi-flask)
+
+## Postgres
+
+I found that a database was going to be a requirement and not an option based on the applications I want to implement, so I added a Postgres DB to the VPS via Docker.
+
+```Dockerfile
+docker pull postgres:alpine
+docker run --name postgres-flask -e POSTGRES_PASSWORD=%PASS% -e PGPORT=%RANDOM_PORT% -p %RANDOM_PORT%:%RANDOM_PORT% -d postgres:alpine
+```
+
+Afterwards, I added a Firewall exception in the VPS console for the random port I selected. This rule is also IP-restricted, but you (or I) may encounter issues with CGNAT when opting for this additional layer of security.
+
+To confirm that the installation was working, I used DBeaver to connect to my database and confirmed that it was able to connect as expected.
