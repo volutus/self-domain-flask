@@ -51,7 +51,7 @@
         <div class="chess-board">
             {% for piece in pieces %}
                 <div class="square">
-                    <div class="piece {{'white' if 'w' == piece[1] else 'black'}}">{{piece[0]}}</div>
+                    <div class="piece {{piece.color}}">{{piece.token}}</div>
                 </div>
                 {% if (loop.index) % 8 == 0 %}
                     <div class="fake-square"></div>
