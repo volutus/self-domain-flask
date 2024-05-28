@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Chess Demo</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/chess.css') }}">
+        <script defer src="{{ url_for('static', filename='/js/chess.js')}}"></script>
+    </head>
+    <body>
+        <div class="chess-board">
+            {% for piece in pieces %}
+                <div class="square" id="{{piece.square}}">
+                    {% if piece.token != None %}
+                        <div class="piece {{piece.color}}">{{piece.token}}</div>
+                    {% endif %}
+                </div>
+                {% if (loop.index) % 8 == 0 %}
+                    <div class="fake-square"></div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    </body>
+</html>

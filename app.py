@@ -16,7 +16,7 @@ def chess_demo():
     starting_state = '846ac6482222222200000000000000000000000000000000111111117359b537'
     content = dict()
     content['pieces'] = chess.create_pieces(starting_state)
-    return render_template("chessboard.html", **content)
+    return render_template("chess.html", **content)
 
 
 if __name__ == "__main__":

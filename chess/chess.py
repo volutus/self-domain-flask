@@ -22,7 +22,7 @@
 # Initialize convenience maps
 if __name__ != '__main__':
     piece_map = dict()
-    piece_map['0'] = ''
+    piece_map['0'] = None
     piece_map['1'] = '♙'
     piece_map['2'] = '♟'
     piece_map['3'] = '♘'
@@ -35,9 +35,9 @@ if __name__ != '__main__':
     piece_map['a'] = '♛'
     piece_map['b'] = '♔'
     piece_map['c'] = '♚'
-    piece_map['d'] = '?'
-    piece_map['e'] = '?'
-    piece_map['f'] = '?'
+    piece_map['d'] = None
+    piece_map['e'] = None
+    piece_map['f'] = None
 
     square_map = dict()
     _i = 0
@@ -60,8 +60,8 @@ class ChessPiece:
     def __init__(self, hex_value, index):
         self.hex_value = hex_value
         self.index = index
-        self.square = ''
-        self.token = ''
+        self.square = None
+        self.token = None
         self.color = ''
         self.create()
 
