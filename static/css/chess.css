@@ -31,7 +31,7 @@ div.chess-board {
     display: none;
 }
 .square.selected {
-    filter: contrast(1.5);
+    background-color: darkcyan;
 }
 .piece {
     font-size: calc(min(12vw, 12vh));
