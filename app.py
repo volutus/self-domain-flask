@@ -10,6 +10,11 @@ def home():
     return render_template("index.html")
 
 
+@app.route("/ping")
+def ping():
+    return "200"
+
+
 @app.route("/chess")
 def chess_demo():
     # Fetch me from the database!
