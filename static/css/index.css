@@ -22,5 +22,10 @@ a {
     text-align: center;
 }
 .links-container > a {
-    display:block;
+    display: block;
+    background: gray;
+    border-radius: 1em;
+    padding: 0.5em;
+    text-decoration: none;
+    color: black;
 }
