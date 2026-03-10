@@ -3,11 +3,8 @@ import psycopg2
 
 def fetch_dict(hex_string):
     # init DB (pull me into a utility if this comes up often)
-    conn = psycopg2.connect(
-        host="localhost",
-        database="postgres",
-        user=os.environ['DB_USERNAME'],
-        password=os.environ['DB_PASSWORD'])
+    conn = psycopg2.connect(host="localhost", database="postgres",
+                            user=os.environ['DB_USERNAME'], pass=os.environ['DB_PASSWORD'])
     
     sql = '''
     select no.name, nm.name as maker, nr.review_date, nr.score, nr.review 

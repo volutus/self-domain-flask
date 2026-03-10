@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from chess import chess
+from noodles import noodles
 
 app = Flask(__name__)
 
