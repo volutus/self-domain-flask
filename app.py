@@ -26,7 +26,9 @@ def chess_route():
 
 @app.route("/noodles")
 def noodles_route():
-    content = noodles.fetch_dict()
+    reviews = noodles.fetch_reviews()
+    content = dict()
+    content['reviews'] = reviews
     return render_template("noodles.html", **content)
 
 if __name__ == "__main__":

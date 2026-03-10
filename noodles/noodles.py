@@ -1,7 +1,7 @@
 import os
 import psycopg2
 
-def fetch_dict():
+def fetch_reviews():
     # init DB (pull me into a utility if this comes up often)
     # db_host = os.environ['DB_HOST']
     db_host = 'self-domain-docker-db-1'
