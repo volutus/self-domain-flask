@@ -1,17 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html class="dark-mode">
     <head>
         <title>Noodle Leaderboard</title>
         <meta charset="UTF-8">
         <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
         <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/noodles.css') }}">
         <script defer src="{{ url_for('static', filename='js/noodles.js')}}"></script>
+
+        <!-- Compiled and minified CSS -->
+        <link rel="stylesheet" href="https://exho-g.github.io/materialize/dist/css/materialize.min.css">
+
+        <!-- Compiled and minified JavaScript -->
+        <script src="https://exho-g.github.io/materialize/dist/js/materialize.min.js"></script>
+
+
     </head>
     <body>
-        <div class="reviews">
-            {% for r in reviews %}
-            <div class="review">{{r.name}}</div>
-            {% endfor %}
+        <div class="container">
+            <table class="striped">
+                <thead>
+                    <tr>
+                        <th>Maker</th>
+                        <th>Name</th>
+                        <th>Review Date</th>
+                        <th>Score</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for r in reviews %}
+                        <tr>
+                            <td>{{r.maker}}</td>
+                            <td>{{r.name}}</td>
+                            <td>{{r.review_date}}</td>
+                            <td>{{r.score}}</td>
+                            <td>{{r.review | replace('\n', '<br>') | safe }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </body>
 </html>
