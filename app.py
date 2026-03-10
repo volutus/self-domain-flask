@@ -25,9 +25,9 @@ def chess_demo():
     return render_template("chess.html", **content)
 
 @app.route("/noodles")
+def noodles():
     content = noodles.fetch_dict()
     return render_template("noodles.html", **content)
-
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')

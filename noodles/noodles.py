@@ -1,11 +1,12 @@
 import os
 import psycopg2
 
-def fetch_dict(hex_string):
+def fetch_dict():
     # init DB (pull me into a utility if this comes up often)
-    conn = psycopg2.connect(host="localhost", database="postgres",
-                            user=os.environ['DB_USERNAME'], pass=os.environ['DB_PASSWORD'])
-    
+    db_user = os.environ['DB_USERNAME']
+    db_pass = os.environ['DB_PASSWORD']
+    conn = psycopg2.connect(host="localhost", database="postgres", user=db_user, password=db_pass)
+
     sql = '''
     select no.name, nm.name as maker, nr.review_date, nr.score, nr.review 
     from noodle_review nr
