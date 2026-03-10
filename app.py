@@ -17,7 +17,7 @@ def ping():
 
 
 @app.route("/chess")
-def chess_demo():
+def chess_route():
     # Fetch me from the database!
     starting_state = '846ac6482222222200000000000000000000000000000000111111117359b537'
     content = dict()
@@ -25,7 +25,7 @@ def chess_demo():
     return render_template("chess.html", **content)
 
 @app.route("/noodles")
-def noodles():
+def noodles_route():
     content = noodles.fetch_dict()
     return render_template("noodles.html", **content)
 
