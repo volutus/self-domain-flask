@@ -23,6 +23,10 @@ def chess_demo():
     content['pieces'] = chess.create_pieces(starting_state)
     return render_template("chess.html", **content)
 
+@app.route("/noodles")
+    content = noodles.fetch_dict()
+    return render_template("noodles.html", **content)
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0')
