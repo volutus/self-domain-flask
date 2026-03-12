@@ -9,10 +9,11 @@ def fetch_reviews():
     conn = psycopg2.connect(host=db_host, database="postgres", user=db_user, password=db_pass)
 
     sql = '''
-    select no.name, nm.name as maker, nr.review_date, nr.score, nr.review 
+    select no.name, no.barcode, no.image_uri, 
+    nm.name as maker, nr.review_date, nr.score, nr.review 
     from noodle_review nr
     join noodles no on nr.noodle_id = no.id 
-    join noodle_maker nm on no.maker_id = nm.id;
+    join noodle_maker nm on no.maker_id = nm.id
     '''
     
     cur = conn.cursor()

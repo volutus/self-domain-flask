@@ -1,44 +1,49 @@
 <!DOCTYPE html>
-<html class="dark-mode">
-    <head>
-        <title>Noodle Leaderboard</title>
-        <meta charset="UTF-8">
-        <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-        <link rel="stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/noodles.css') }}">
-        <script defer src="{{ url_for('static', filename='js/noodles.js')}}"></script>
+<html lang="en" data-bs-theme="dark">
 
-        <!-- Compiled and minified CSS -->
-        <link rel="stylesheet" href="https://exho-g.github.io/materialize/dist/css/materialize.min.css">
+<head>
+  <title>Noodle Leaderboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
-        <!-- Compiled and minified JavaScript -->
-        <script src="https://exho-g.github.io/materialize/dist/js/materialize.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/noodles.css') }}">
+  <script defer src="{{ url_for('static', filename='js/noodles.js')}}"></script>
 
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
 
-    </head>
-    <body>
-        <div class="container">
-            <table class="striped">
-                <thead>
-                    <tr>
-                        <th>Maker</th>
-                        <th>Name</th>
-                        <th>Review Date</th>
-                        <th>Score</th>
-                        <th>Notes</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for r in reviews %}
-                        <tr>
-                            <td>{{r.maker}}</td>
-                            <td>{{r.name}}</td>
-                            <td>{{r.review_date}}</td>
-                            <td>{{r.score}}</td>
-                            <td>{{r.review | replace('\n', '<br>') | safe }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="section">
+      <div class="columns">
+        <div class="column has-text-centered">
+          <h1 class="title" style="color: ghostwhite;">Cup Noodle Reviews</h1><br>
         </div>
-    </body>
+      </div>
+
+      <div class="noodle-container">
+        {% for r in reviews %}
+        <div class="card">
+          <div class="card-image">
+            <img class="noodle-image" src="{{r.image_uri}}" alt="Advertiser image for {{r.name}}"/>
+          </div>
+          <div class="card-content">
+            <div class="title">{{r.name}}</div>
+            <div class="subtitle">{{r.maker}}</div>
+            <div class="">Review Date: {{r.review_date}}</div>
+            <div class="">Grade: {{r.score}}/100</div>
+            <div class="">Barcode: {{r.barcode}}</div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+    </div>
+  </div>
+
+</body>
+
 </html>
