@@ -14,6 +14,7 @@ def fetch_reviews():
     from noodle_review nr
     join noodles no on nr.noodle_id = no.id 
     join noodle_maker nm on no.maker_id = nm.id
+    order by review_date desc;
     '''
     
     cur = conn.cursor()
