@@ -8,7 +8,17 @@ img.noodle-image {
 
 .noodle-container {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(3, 1fr);
+}
+@media (max-width: 1024px) {
+    .noodle-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media (max-width: 600px) {
+    .noodle-container {
+        grid-template-columns: 1fr;
+    }
 }
 
 .card {
@@ -16,6 +26,21 @@ img.noodle-image {
     margin: 0.5rem;
 }
 
-.hidden {
-    display: none;
+.review-grade {
+    outline: thin solid white;
+    padding: 0.5rem;
+    font-size: x-large;
+    margin: 1rem;
+    cursor: pointer;
+}
+.grade-icon {
+    float: right;
+}
+
+.review-details {
+    border-radius: 1em;
+    padding: 0.5em;
+    font-size: large;
+    background: #aaa;
+    color: black;
 }

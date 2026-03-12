@@ -6,11 +6,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-
-  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/noodles.css') }}">
-  <script defer src="{{ url_for('static', filename='js/noodles.js')}}"></script>
-
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css">
+
+  <script defer src="{{ url_for('static', filename='js/noodles.js')}}"></script>
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static',filename='css/noodles.css') }}">
 
 </head>
 
@@ -33,11 +34,15 @@
           <div class="card-content">
             <div class="title">{{r.name}}</div>
             <div class="subtitle">{{r.maker}}</div>
-            <div class="">Review Date: {{r.review_date}}</div>
-            <div class="">Grade: {{r.score}}/100</div>
-            <div class="">Barcode: {{r.barcode}}</div>
-            <hr>
-            <div class="">{{r.review | replace('\n', '<br>') | safe }}</div>
+            <div>Review Date: {{r.review_date}}</div>
+            <div>Barcode: {{r.barcode}}</div>
+            
+            <div class="review-grade">
+              <span class="grade-text"> {{r.score}}/100 </span>
+              <span class="review-toggle grade-icon">➕</span>
+              <span class="review-toggle grade-icon" style="display:none;">➖</span>
+            </div>
+            <div class="review-details review-toggle" style="display:none;">{{r.review | replace('\n', '<br>') | safe }}</div>
           </div>
         </div>
         {% endfor %}
