@@ -36,6 +36,8 @@
             <div class="">Review Date: {{r.review_date}}</div>
             <div class="">Grade: {{r.score}}/100</div>
             <div class="">Barcode: {{r.barcode}}</div>
+            <hr>
+            <div class="">{{r.review | replace('\n', '<br>') | safe }}</div>
           </div>
         </div>
         {% endfor %}
