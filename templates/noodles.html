@@ -27,7 +27,12 @@
 
       <div class="noodle-container">
         {% for r in reviews %}
-        <div class="card">
+        <div class="card" data-grade="{{r.score}}" data-price="{{r.price}}">
+          
+          <div class="card-content">
+            <div class="title grade">{{r.score}} / 100</div>
+            <div class="price">{{r.price}}</div>
+          </div>
           <div class="card-image">
             <img class="noodle-image" src="{{r.image_uri}}" alt="Advertiser image for {{r.name}}"/>
           </div>
@@ -38,9 +43,7 @@
             <div>Barcode: {{r.barcode}}</div>
             
             <div class="review-grade">
-              <span class="grade-text"> {{r.score}}/100 </span>
-              <span class="review-toggle grade-icon">➕</span>
-              <span class="review-toggle grade-icon" style="display:none;">➖</span>
+              <a href="javascript:void(0)" class="grade-text"> Details </a>
             </div>
             <div class="review-details review-toggle" style="display:none;">{{r.review | replace('\n', '<br>') | safe }}</div>
           </div>

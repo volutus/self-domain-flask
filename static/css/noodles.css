@@ -32,6 +32,7 @@ img.noodle-image {
     font-size: x-large;
     margin: 1rem;
     cursor: pointer;
+    text-align: center;
 }
 .grade-icon {
     float: right;
@@ -43,4 +44,8 @@ img.noodle-image {
     font-size: large;
     background: #aaa;
     color: black;
+}
+.grade, .price {
+    text-align: center;
+    margin-bottom: 0em !important;
 }
