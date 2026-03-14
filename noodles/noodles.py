@@ -1,12 +1,6 @@
-import os
-import psycopg2
+from utils import db
 
 def fetch_reviews():
-    # init DB (pull me into a utility if this comes up often)
-    db_host = os.environ['DB_HOST']
-    db_user = os.environ['DB_USERNAME']
-    db_pass = os.environ['DB_PASSWORD']
-    conn = psycopg2.connect(host=db_host, database="postgres", user=db_user, password=db_pass)
 
     sql = '''
     select no.name, no.barcode, no.image_uri, no.container_type,
@@ -14,18 +8,16 @@ def fetch_reviews():
     from noodle_review nr
     join noodles no on nr.noodle_id = no.id 
     join noodle_maker nm on no.maker_id = nm.id 
-    order by score desc;
+    order by score desc, price;
     '''
-    
-    cur = conn.cursor()
-    cur.execute(sql)
-    columns = [column[0] for column in cur.description]
-    reviews = []
-    for row in cur.fetchall():
-        reviews.append(dict(zip(columns, row)))
 
-    cur.close()
-    conn.close()
+    with db.fetch_connection() as conn:
+        cur = conn.cursor()
+        cur.execute(sql)
+        columns = [column[0] for column in cur.description]
+        reviews = []
+        for row in cur.fetchall():
+            reviews.append(dict(zip(columns, row)))
 
     return reviews
     
