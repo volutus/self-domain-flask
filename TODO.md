@@ -7,6 +7,7 @@
 - Find solution to download and shrink images down to ~300px wide. We're just using a link right now but some of these images are 2+ MB which won't scale beyond 10 reviews or so without ever-increasing page load times.
 - Implement content management system for noodle DB
     - This solution can also help to solve the images issue since the content manager can accept a link which it can use to download and shrink the provided image. Then the data could go into a BLOB column
+    - This will require authentication. [This BCrypt Flask library seems like a good answer.](https://flask-bcrypt.readthedocs.io/en/1.0.1/)
 - Consider creating a dedicated review page for each noodle and linking to the reviews rather than expanding a content section.
     - This would require actual reviews rather than short text. We may simply lack the content for that currently.
 - Implement fingernail style filtering for reviews in a style similiar to Spotify "Liked Songs" filtering
@@ -18,8 +19,7 @@
 
 - Implement game rules
     - This is probably a huge pain in the ass. Chess rules can vary based on the sanctioning body, but largely in regards to draws and clock rules.
-    - Consider the listed example of a player drawing on insufficient material because white ran out their clock in a forced mate position
-        - https://www.reddit.com/r/chess/comments/13mh7wm/why_is_this_a_draw_by_timeout_vs_insufficient/
+    - Consider [this example](https://www.reddit.com/r/chess/comments/13mh7wm/why_is_this_a_draw_by_timeout_vs_insufficient/) of a player drawing on insufficient material because white ran out their clock in a forced mate position.
 - Replace weird hex tile positioning system with FENs / PGNs
     - This requires more research as well. When I designed the hex placement system, I was unaware that these notation systems existed at all.
 - Multiplayer games with server interactivity? This could be done if the rules are hashed out since we have a DB, but it would require the persistent DB listed in the noodles section.
