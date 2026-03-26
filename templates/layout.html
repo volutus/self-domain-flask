@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind-output.css') }}">
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/noodles.svg') }}" />
+    <title>{% block title %}{% endblock %}</title>
+    {% endblock %}
+</head>
+
+<body>
+    <div id="content">{% block content %}{% endblock %}</div>
+</body>
+
+</html>

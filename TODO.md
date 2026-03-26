@@ -2,8 +2,6 @@
 
 ## Noodles
 
-- Replace initializer SQL script with persistent DB
-    - This solution requires a DB backup solution which can just be accomplished with a cronjob for this environment
 - Find solution to download and shrink images down to ~300px wide. We're just using a link right now but some of these images are 2+ MB which won't scale beyond 10 reviews or so without ever-increasing page load times.
 - Implement content management system for noodle DB
     - This solution can also help to solve the images issue since the content manager can accept a link which it can use to download and shrink the provided image. Then the data could go into a BLOB column

@@ -31,5 +31,11 @@ def noodles_route():
     content['reviews'] = reviews
     return render_template("noodles.html", **content)
 
+@app.route("/nms/login")
+def nms_login():
+    return render_template("nms/login.html")
+
 if __name__ == "__main__":
-    app.run(host='0.0.0.0')
+    # This is only used for local runs, so you can set debug true with no problem
+    # In prod, it's being run by gunicorn. See the docker repo for the details on that.
+    app.run(host='0.0.0.0', debug=True)

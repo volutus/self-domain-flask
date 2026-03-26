@@ -42,6 +42,7 @@ ResultActive=yes
 Even with these rules, I have to target the service by its full name which is a bit odd, but this setup allows me to automatically restart the Flask service without needing credentials. As a result, it could be automated if desired.
 
 ## Docker
+
 At this point, I wanted to test a Docker setup, so I installed the Docker engine [using the standard guide from Docker](https://docs.docker.com/engine/install/debian/). 
 
 The goal is to reach a setup similar to the [one in this example repo.](https://github.com/docker/awesome-compose/tree/master/nginx-wsgi-flask)
@@ -58,3 +59,9 @@ docker run --name postgres-flask -e POSTGRES_PASSWORD=%PASS% -e PGPORT=%RANDOM_P
 Afterwards, I added a Firewall exception in the VPS console for the random port I selected. This rule is also IP-restricted, but you (or I) may encounter issues with CGNAT when opting for this additional layer of security.
 
 To confirm that the installation was working, I used DBeaver to connect to my database and confirmed that it was able to connect as expected.
+
+## Tailwind
+
+I'm starting to test around with tailwindcss. It's basically everywhere at this point and I'm a big fan of the ready-to-use snippets that you can take from anywhere and drop in.
+
+To use it, you'll need the tailwind CLI. I'm just using the raw CLI which I pulled using pacman, but you can get the CLI any which way you prefer. The tailwind.sh runner script shows how I'm using it to compile the CSS file. 
