@@ -1,0 +1,61 @@
+
+
+{% extends "nms/layout.html" %}
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}
+
+<div class="flex-col h-screen bg-gray-800">
+    <div class="flex-0 rounded bg-gray-300 item-center text-center">
+        {% include "nms/header.html" %}
+    </div>
+
+    <div class="flex-1 w-full m-auto rounded p-5">
+        <form action="/nms/update/noodle-review" method="POST">
+
+            {% with element_id='name', element_label='Noodle Name', element_value=review.name %}
+                {% include "nms/controls/_text.html" %}
+            {% endwith %}
+
+            {% with element_id='maker_id', element_label='Maker', options=maker_options, selected=review.maker_id %}
+                {% include "nms/controls/_select.html" %}
+            {% endwith %}
+            
+            {% with element_id='barcode', element_label='Barcode', element_value=review.barcode %}
+                {% include "nms/controls/_text.html" %}
+            {% endwith %}
+
+            {% with element_id='container_type', element_label='Container Type', options=container_types, selected=review.container_type %}
+                {% include "nms/controls/_select.html" %}
+            {% endwith %}
+
+            {% with element_id='image_uri', element_label='Image Link', element_value=review.image_uri %}
+                {% include "nms/controls/_text.html" %}
+            {% endwith %}
+
+            {% with element_id='review_date', element_label='Review Date', element_value=review.review_date %}
+                {% include "nms/controls/_text.html" %}
+            {% endwith %}
+            
+            {% with element_id='score', element_label='Score', element_value=review.score %}
+                {% include "nms/controls/_text.html" %}
+            {% endwith %}
+
+            {% with element_id='price', element_label='Price', element_value=review.price %}
+                {% include "nms/controls/_text.html" %}
+            {% endwith %}
+
+            {% with element_id='review', element_label='Review Text', element_value=review.review %}
+                {% include "nms/controls/_textarea.html" %}
+            {% endwith %}
+
+            {% with object=review %}
+                {% include "nms/controls/_buttons.html" %}
+            {% endwith %}
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,44 @@
+<!-- component -->
+<div class="mx-auto">
+
+    <div class="relative flex flex-col w-full h-full overflow-ellipsis text-slate-300 bg-slate-800 shadow-md rounded-lg bg-clip-border">
+        <table class="text-left table-auto">
+            <thead>
+                <tr>
+                    {% for f in fields %}
+                    <th class="p-4 border-b border-slate-600 bg-slate-700">
+                        <p class="text-sm font-normal leading-none text-slate-300">
+                            {{f}}
+                        </p>
+                    </th>
+                    {% endfor %}
+                    <th class="p-4 border-b border-slate-600 bg-slate-700">
+                    
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {% for r in records %}
+                <tr class="hover:bg-slate-700">
+                    {% for x in to_values(r) %}
+                    <td class="p-4 border-b border-slate-700">
+                        <p class="text-sm text-slate-100 font-semibold">
+                            {{x}}
+                        </p>
+                    </td>
+                    {% endfor %}
+                    <td class="p-4 border-b border-slate-700 text-right">
+                        <a href="{{r.uri()}}" 
+                            class="text-white bg-amber-800 rounded box-border border border-transparent hover:bg-amber-800-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+                            Edit
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+</div>

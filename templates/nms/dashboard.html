@@ -1,0 +1,17 @@
+{% extends "nms/layout.html" %}
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}
+
+
+
+<div class="flex h-screen bg-gray-800">
+    <div class="w-full max-w-xs m-auto bg-gray-300 rounded p-5">
+        {% include "nms/header.html" %}
+        {% with list=dashboard_links %}
+            {% include "nms/link-list.html" %}
+        {% endwith %}
+    </div>
+</div>
+
+{% endblock %}

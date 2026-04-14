@@ -1,0 +1,9 @@
+<label for="{{element_id}}">
+    <span class="font-medium text-gray-700 dark:text-gray-200"> {{element_label}} </span>
+</label>
+<select name="{{element_id}}" id="{{element_id}}"
+    class="mt-0.5 p-2 w-full rounded border-gray-300 shadow-sm sm:text-sm dark:border-gray-600 dark:bg-gray-900 dark:text-white">
+    {% for o in options %}
+        <option value="{{o.value}}" {% if o.value == selected %} selected {% endif %}>{{o.text}}</option>
+    {% endfor %}
+</select>

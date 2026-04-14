@@ -1,0 +1,19 @@
+{% extends "nms/layout.html" %}
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}
+
+<div class="flex flex-col h-screen bg-gray-800">
+    <div class="flex-0 rounded bg-gray-300 item-center text-center">
+        {% include "nms/header.html" %}
+    </div>
+    {% include "nms/controls/_notice.html" %}
+
+    <a href="{{link}}" class="bg-blue-500 hover:bg-blue-800 max-w-[720px] mx-auto rounded px-5 py-3 m-4 hover:cursor-pointer">🐑 Create New</a>
+
+    <div class="flex-1 w-full m-auto rounded p-5">
+        {% include "nms/controls/_table.html" %}
+    </div>
+</div>
+
+{% endblock %}

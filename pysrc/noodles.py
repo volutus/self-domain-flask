@@ -1,4 +1,4 @@
-from utils import db
+from pysrc import db
 
 def fetch_reviews():
 

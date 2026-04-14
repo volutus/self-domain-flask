@@ -1,0 +1,27 @@
+{% extends "nms/layout.html" %}
+{% block title %}{{title}}{% endblock %}
+
+{% block content %}
+
+<div class="flex-col h-screen bg-gray-800">
+    <div class="flex-0 rounded bg-gray-300 item-center text-center">
+        {% include "nms/header.html" %}
+    </div>
+
+    <div class="flex-1 w-full m-auto rounded p-5">
+        <form action="/nms/update/noodle-maker" method="POST">
+
+            {% with element_id='name', element_label='Maker Name', element_value=maker.name %}
+                {% include "nms/controls/_text.html" %}
+            {% endwith %}
+
+            {% with object=maker %}
+                {% include "nms/controls/_buttons.html" %}
+            {% endwith %}
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

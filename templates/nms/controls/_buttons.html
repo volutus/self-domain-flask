@@ -1,0 +1,9 @@
+
+<div class="flex flex-wrap justify-center">
+    {% if object %}
+    <input type="hidden" id="id" name="id" value="{{object.id}}">
+    <button type="submit" name="mode" value="update" class="bg-green-200 hover:bg-green-500 rounded px-5 py-3 m-4 hover:cursor-pointer">✏️ Update</button>
+    <button type="submit" name="mode" value="delete" class="bg-red-200 hover:bg-red-500 rounded px-5 py-3 m-4 hover:cursor-pointer">🗑️ Delete</button>
+    {% endif %}
+    <button type="submit" name="mode" value="create" class="bg-blue-200 hover:bg-blue-500 rounded px-5 py-3 m-4 hover:cursor-pointer">🐑 Create New</button>
+</div>
