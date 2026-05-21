@@ -2,4 +2,5 @@
       {{element_label}}
 </label>
 <input class="w-full bg-gray-200 rounded p-3"
-placeholder="{{element_label}}" id="{{element_id}}" name="{{element_id}}" value="{{element_value}}"/>
+placeholder="{{element_label}}" id="{{element_id}}" name="{{element_id}}" value="{{element_value}}" 
+{% if pattern %} pattern="{{pattern}}" {% endif %} title="{{element_title}}"/>

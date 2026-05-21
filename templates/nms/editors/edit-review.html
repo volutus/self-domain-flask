@@ -34,15 +34,15 @@
             {% endwith %}
 
             {% with element_id='review_date', element_label='Review Date', element_value=review.review_date %}
-                {% include "nms/controls/_text.html" %}
+                {% include "nms/controls/_date.html" %}
             {% endwith %}
             
-            {% with element_id='score', element_label='Score', element_value=review.score %}
-                {% include "nms/controls/_text.html" %}
+            {% with element_id='score', element_label='Score', element_value=review.score, min="0", max="100", step="1" %}
+                {% include "nms/controls/_number.html" %}
             {% endwith %}
 
-            {% with element_id='price', element_label='Price', element_value=review.price %}
-                {% include "nms/controls/_text.html" %}
+            {% with element_id='price', element_label='Price', element_value=review.price, element_title="Price of the noodle. Must be formatted as $1.23" %}
+                {% include "nms/controls/_price.html" %}
             {% endwith %}
 
             {% with element_id='review', element_label='Review Text', element_value=review.review %}
