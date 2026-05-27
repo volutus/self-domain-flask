@@ -35,10 +35,10 @@
             <div class="price">{{r.price}}</div>
           </div>
           <div class="card-image">
-            {% if r.image_b64 %}
-              <img class="noodle-image" alt="Advertiser image for {{r.name}}" src="data:image/avif;base64,{{ r.image_b64 | safe }}">
-            {% else %}
+            {% if r.image_uri %}
               <img class="noodle-image" alt="Advertiser image for {{r.name}}" src="{{r.image_uri}}"/>
+            {% else %}
+              <img class="noodle-image" alt="Advertiser image for {{r.name}}" src="data:image/avif;base64,{{ r.image_b64 | safe }}">
             {% endif %}
           </div>
           <div class="card-content">

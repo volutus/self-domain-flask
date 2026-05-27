@@ -20,6 +20,7 @@ def fetch_reviews():
         for row in cur.fetchall():
             reviews.append(dict(zip(columns, row)))
         
+        # Probably don't need this now
         for r in reviews:
             if r["image_data"] is not None:
                 r["image_b64"] = base64.b64encode(r["image_data"]).decode("utf-8")
