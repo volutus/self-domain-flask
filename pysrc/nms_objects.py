@@ -218,11 +218,11 @@ class NoodleReview(object):
 
         response = requests.get(self.image_uri)  
         original = Image.open(io.BytesIO(response.content))
-        original.thumbnail((300, 300))
+        original.thumbnail((600, 600))
         
-        filename = f"./static/noodles/{self.id}.avif" 
-        original.save(filename, format='AVIF')     
-        self.image_uri = filename
+        avif = f"./static/noodles/{self.id}.avif" 
+        original.save(avif, format='AVIF')
+        self.image_uri = avif
         
         # Also save the data into the DB so we can replicate from nothing if needed
         new_image = io.BytesIO()
