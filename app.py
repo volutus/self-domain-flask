@@ -1,6 +1,6 @@
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, request
 from flask_session import Session
-from pysrc import chess, noodles, nms
+from pysrc import chess, noodles, nms, sauces
 from pysrc.decorators import nms_login_required
 
 app = Flask(__name__)
@@ -37,6 +37,11 @@ def noodles_route():
     content = dict()
     content['reviews'] = reviews
     return render_template("noodles.html", **content)
+
+
+@app.route("/sauces")
+def sauces_route():
+    return render_template("sauces.html", **sauces.fetch_all())
 
 @app.route("/nms/login", methods=["GET"])
 def nms_login_get():

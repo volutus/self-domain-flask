@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Hot Sauces | Sauceboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind-output.css') }}">
+    <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='img/sauce.svg') }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body class="bg-gray-800">
+<div class="mx-auto">
+    <div class="relative flex flex-col w-full h-full overflow-ellipsis text-slate-300 bg-slate-800 shadow-md rounded-lg bg-clip-border">
+        <table class="text-left table-auto">
+          <thead>
+            <tr>
+              {% for f in fields %}
+              <th class="p-4 border-b border-slate-600 bg-slate-700">
+                <p class="text-sm font-normal leading-none text-slate-300">
+                  {{f}}
+                </p>
+              </th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for s in records %}
+            <tr class="hover:bg-slate-700">
+              {% for x in to_values(s) %}
+              <td class="p-4 border-b border-slate-700">
+                  <p class="text-sm text-slate-100 font-semibold">
+                      {{x}}
+                  </p>
+              </td>
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </tbody>
+      </table>
+    </div>
+</div>
+</body>
+
+</html>
