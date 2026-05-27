@@ -220,7 +220,7 @@ class NoodleReview(object):
         original = Image.open(io.BytesIO(response.content))
         original.thumbnail((400, 400))
         
-        filename = f"/static/noodles/{self.id}.avif" 
+        filename = f"./static/noodles/{self.id}.avif" 
         original.save(filename, format='AVIF')     
         self.image_uri = filename
         
