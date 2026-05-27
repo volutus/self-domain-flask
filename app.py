@@ -38,6 +38,10 @@ def noodles_route():
     content['reviews'] = reviews
     return render_template("noodles.html", **content)
 
+# @app.route("/noodle_images/{id}.avif")
+# def noodle_image():
+#     pass
+
 
 @app.route("/sauces")
 def sauces_route():
