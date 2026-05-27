@@ -2,7 +2,6 @@ import pysrc.db as db
 import requests
 from PIL import Image
 import io
-import base64
 
 class DashboardLink(object):
     def __init__(self, row):
