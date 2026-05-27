@@ -1,4 +1,8 @@
 import pysrc.db as db
+import requests
+from PIL import Image
+import io
+import base64
 
 class DashboardLink(object):
     def __init__(self, row):
@@ -106,6 +110,7 @@ class NoodleReview(object):
         self.barcode = row['barcode']
         self.container_type = row['container_type']
         self.image_uri = row['image_uri']
+        self.image_data = row.get('image_data')
         self.review_date = row['review_date']
         self.score = row['score']
         self.price = row['price']
@@ -129,7 +134,7 @@ class NoodleReview(object):
     
     @staticmethod
     def fetch_id(id):
-        maker = None
+        obj = None
         sql = """
         select no.*, nr.review_date, nr.score, nr.price, nr.review
         from noodle_review nr
@@ -143,8 +148,8 @@ class NoodleReview(object):
 
             row = cur.fetchone()
             if row is not None and len(row) > 0:
-                maker = NoodleReview(row)
-        return maker
+                obj = NoodleReview(row)
+        return obj
         
     
     def uri(self):
@@ -162,12 +167,13 @@ class NoodleReview(object):
             
     
     def update(self):
-        update_noodle = "UPDATE noodles SET name=%s, maker_id=%s, barcode=%s, container_type=%s, image_uri=%s where id=%s"
+        self.rip_image()
+        update_noodle = "UPDATE noodles SET name=%s, maker_id=%s, barcode=%s, container_type=%s, image_uri=%s, image_data=%s where id=%s"
         update_review = "UPDATE noodle_review SET review_date=%s, score=%s, price=%s, review=%s WHERE noodle_id=%s"
         with db.fetch_connection() as conn:
             cur = conn.cursor()
             
-            noodle_params = (self.name, self.maker_id, self.barcode, self.container_type, self.image_uri, self.id)
+            noodle_params = (self.name, self.maker_id, self.barcode, self.container_type, self.image_uri, self.image_data, self.id)
             cur.execute(update_noodle, noodle_params)
             
             review_params = (self.review_date, self.score, self.price, self.review, self.id)
@@ -176,12 +182,13 @@ class NoodleReview(object):
         return f"Update completed for noodle #{self.id} and associated review." 
     
     def create(self):
-        noodle = "INSERT INTO noodles (name, maker_id, barcode, container_type, image_uri) VALUES (%s, %s, %s, %s, %s) RETURNING id"
+        self.rip_image()
+        noodle = "INSERT INTO noodles (name, maker_id, barcode, container_type, image_uri, image_data) VALUES (%s, %s, %s, %s, %s, %s) RETURNING id"
         review = "INSERT INTO noodle_review (review_date, score, price, review, noodle_id) VALUES (%s, %s, %s, %s, %s)"
         with db.fetch_connection() as conn:
             cur = conn.cursor()
             
-            noodle_params = (self.name, self.maker_id, self.barcode, self.container_type, self.image_uri)
+            noodle_params = (self.name, self.maker_id, self.barcode, self.container_type, self.image_uri, self.image_data)
             cur.execute(noodle, noodle_params)
             
             row = cur.fetchone()
@@ -205,6 +212,21 @@ class NoodleReview(object):
             
         return f"Delete processed for noodle #{self.id} and associated review." 
     
+    def rip_image(self):
+        if self.image_uri is None:
+            return
+
+        response = requests.get(self.image_uri)  
+        original = Image.open(io.BytesIO(response.content))
+        original.thumbnail((400, 400))
+        
+        new_image = io.BytesIO()
+        original.save(new_image, format='AVIF')     # to test, switch new_image to "test.avif" which will write it to a file
+
+        self.image_data = new_image.getvalue()
+        # self.image_uri = None                 # re-enable me once comfortable with the AVIF b64 stuff. this will clear out the URI and prevent unneeded churn
+
+        
 
 class SelectOption(object):
     def __init__(self, value, text):
