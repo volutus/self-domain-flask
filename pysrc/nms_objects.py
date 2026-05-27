@@ -167,27 +167,30 @@ class NoodleReview(object):
     
     def update(self):
         self.rip_image()
-        update_noodle = "UPDATE noodles SET name=%s, maker_id=%s, barcode=%s, container_type=%s, image_uri=%s, image_data=%s where id=%s"
+        update_noodle = "UPDATE noodles SET name=%s, maker_id=%s, barcode=%s, container_type=%s, image_uri=%s where id=%s"
         update_review = "UPDATE noodle_review SET review_date=%s, score=%s, price=%s, review=%s WHERE noodle_id=%s"
         with db.fetch_connection() as conn:
             cur = conn.cursor()
             
-            noodle_params = (self.name, self.maker_id, self.barcode, self.container_type, self.image_uri, self.image_data, self.id)
+            noodle_params = (self.name, self.maker_id, self.barcode, self.container_type, self.image_uri, self.id)
             cur.execute(update_noodle, noodle_params)
             
             review_params = (self.review_date, self.score, self.price, self.review, self.id)
             cur.execute(update_review, review_params)
+        
+            self.update_image(cur)
             
         return f"Update completed for noodle #{self.id} and associated review." 
     
     def create(self):
         self.rip_image()
-        noodle = "INSERT INTO noodles (name, maker_id, barcode, container_type, image_uri, image_data) VALUES (%s, %s, %s, %s, %s, %s) RETURNING id"
+        
+        noodle = "INSERT INTO noodles (name, maker_id, barcode, container_type, image_uri) VALUES (%s, %s, %s, %s, %s) RETURNING id"
         review = "INSERT INTO noodle_review (review_date, score, price, review, noodle_id) VALUES (%s, %s, %s, %s, %s)"
         with db.fetch_connection() as conn:
             cur = conn.cursor()
             
-            noodle_params = (self.name, self.maker_id, self.barcode, self.container_type, self.image_uri, self.image_data)
+            noodle_params = (self.name, self.maker_id, self.barcode, self.container_type, self.image_uri)
             cur.execute(noodle, noodle_params)
             
             row = cur.fetchone()
@@ -195,6 +198,8 @@ class NoodleReview(object):
             
             review_params = (self.review_date, self.score, self.price, self.review, self.id)
             cur.execute(review, review_params)
+        
+            self.update_image(cur)
             
         return f"Create completed for noodle #{self.id} and associated review." 
     
@@ -213,7 +218,7 @@ class NoodleReview(object):
     
     def rip_image(self):
         if self.image_uri is None or not self.image_uri.startswith("http"):
-            return
+            return False
 
         response = requests.get(self.image_uri)  
         original = Image.open(io.BytesIO(response.content))
@@ -227,7 +232,14 @@ class NoodleReview(object):
         new_image = io.BytesIO()
         original.save(new_image, format='AVIF')     
         self.image_data = new_image.getvalue()
-
+        
+        return True
+    
+    def update_image(self, cur):
+        if self.image_data is not None:
+            sql = "UPDATE noodles SET image_data=%s where id=%s"
+            params = (self.image_data, self.id)
+            cur.execute(sql, params)
 
         
 
