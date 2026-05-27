@@ -213,18 +213,22 @@ class NoodleReview(object):
         return f"Delete processed for noodle #{self.id} and associated review." 
     
     def rip_image(self):
-        if self.image_uri is None:
+        if self.image_uri is None or self.image_uri.startswith("/"):
             return
 
         response = requests.get(self.image_uri)  
         original = Image.open(io.BytesIO(response.content))
         original.thumbnail((400, 400))
         
+        filename = f"/static/noodles/{self.id}.avif" 
+        original.save(filename, format='AVIF')     
+        self.image_uri = filename
+        
+        # Also save the data into the DB so we can replicate from nothing if needed
         new_image = io.BytesIO()
-        original.save(new_image, format='AVIF')     # to test, switch new_image to "test.avif" which will write it to a file
-
+        original.save(new_image, format='AVIF')     
         self.image_data = new_image.getvalue()
-        # self.image_uri = None                 # re-enable me once comfortable with the AVIF b64 stuff. this will clear out the URI and prevent unneeded churn
+
 
         
 
