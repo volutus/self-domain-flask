@@ -212,7 +212,7 @@ class NoodleReview(object):
         return f"Delete processed for noodle #{self.id} and associated review." 
     
     def rip_image(self):
-        if self.image_uri is None or self.image_uri.startswith("/"):
+        if self.image_uri is None or not self.image_uri.startswith("http"):
             return
 
         response = requests.get(self.image_uri)  
